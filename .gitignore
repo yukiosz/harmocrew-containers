@@ -1,0 +1,7 @@
+web/node_modules/
+web/build/
+web/coverage/
+api/target/
+.idea/
+.vscode/
+*.iml
