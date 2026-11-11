@@ -1,7 +1,4 @@
 #!/bin/sh
-# Varia o numero de replicas de um servico da stack.
-#   ./infra/swarm/scale.sh api 5
-#   ./infra/swarm/scale.sh api 1
 set -eu
 export DOCKER_HOST="tcp://127.0.0.1:2375"
 

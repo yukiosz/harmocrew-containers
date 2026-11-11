@@ -1,5 +1,4 @@
-# Laboratorio do Swarm: 3 Docker Engines em containers (Docker-in-Docker)
-# + um registry local de onde os nos baixam as imagens do projeto.
+
 services:
   registry:
     image: registry:2
@@ -19,12 +18,10 @@ services:
     environment:
       DOCKER_TLS_CERTDIR: ""
     ports:
-      - "127.0.0.1:2375:2375"   # API do Docker do manager (DOCKER_HOST)
-      # As portas publicadas pela stack existem DENTRO do manager.
-      # Este mapeamento leva-as ate o navegador do host.
-      - "127.0.0.1:8000:8000"   # web
-      - "127.0.0.1:8080:8080"   # api (routing mesh)
-      - "127.0.0.1:8081:8081"   # Docker Visualizer
+      - "127.0.0.1:2375:2375"
+      - "127.0.0.1:8000:8000"
+      - "127.0.0.1:8080:8080"  
+      - "127.0.0.1:8081:8081"
     volumes:
       - manager-data:/var/lib/docker
     networks:

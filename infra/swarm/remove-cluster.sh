@@ -1,6 +1,4 @@
 #!/bin/sh
-# Remove a stack e desmonta o cluster. Os volumes so sao apagados com:
-#   docker compose -f infra/swarm/docker-compose.cluster.yml down -v
 set -eu
 
 DOCKER_HOST=tcp://127.0.0.1:2375 docker stack rm harmocrew 2>/dev/null || true

@@ -1,5 +1,3 @@
-# Stack HarmoCrew no Swarm: web (React + NGINX) -> api (Spring Boot) -> db
-# Todas as imagens de execucao sao baseadas em Alpine Linux.
 services:
   web:
     image: registry:5000/harmocrew-web:latest
@@ -29,8 +27,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/harmocrew
       SPRING_DATASOURCE_USERNAME: harmocrew
       SPRING_DATASOURCE_PASSWORD: harmocrew
-      # Mesmo segredo em todas as replicas: um token emitido por uma replica
-      # e aceito por qualquer outra.
       APP_JWT_SECRET: harmocrew-swarm-demonstration-secret
       JAVA_TOOL_OPTIONS: -XX:MaxRAMPercentage=75
     ports:
@@ -59,8 +55,6 @@ services:
       rollback_config:
         parallelism: 1
         order: stop-first
-      # O Swarm ignora depends_on: se a API subir antes do banco, falha e e
-      # recriada (sem limite de tentativas) ate o banco ficar pronto.
       restart_policy:
         condition: on-failure
         delay: 10s
@@ -88,7 +82,7 @@ services:
           memory: 256M
       placement:
         constraints:
-          - node.role == manager   # o volume e local ao no
+          - node.role == manager
       restart_policy:
         condition: on-failure
 
@@ -109,7 +103,7 @@ services:
           memory: 128M
       placement:
         constraints:
-          - node.role == manager   # precisa do socket de um manager
+          - node.role == manager
 
 networks:
   backend:
